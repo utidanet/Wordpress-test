@@ -16,25 +16,34 @@
             <section class="newsBlock block">
                 <h1 class="type-B"><span>新着情報</span></h1>
 
-                <article class="news">
+                
+                <?php if (have_posts() : 
+                          while ( have_posts() ) : the_post(); 
+                ?>
+                <article id="post-<?php the_ID(); ?>" <?php post_class('news'); ?>>
                     <div class="text">
                         <div class="entryInfo">
                             <div class="categories">
-                                <ul>
-                                    <li><a href="#">お知らせ</a></li>
-                                </ul>
+                                <?php the_categry(); ?>
                             </div>
-                            <time datetime="2015-03-22">2015.03.22(sun)</time>
+                            <time datetime="<?php the_time('Y-m-d'); ?>"><?php the_time('Y年m月d日(1)'); ?></time>
                         </div>
-                        <h1><a href="../hotel/single.html">お花見企画の予約を開始しました</a></h1>
-                        <p>
-                            今年も恒例のお花見企画を行います。4月11日（土）に当ホテルの中庭にて、お花見をしませんか？
-                            毎年、多くのお客さまにご好評を頂いております。
-                        </p>
-                        <p>[<a href="../hotel/single.html">続きを読む</a>]</p>
+                        <h1><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
+                        <?php the_excerpt(); ?>
+                        <p>[<a href="<?php the_permalink(); ?>">続きを読む</a>]</p>
                     </div>
-                    <figure><a href="../hotel/single.html"><img src="<?php echo get_template_directory_uri(); ?>/images/dummy/180x180-3.png" height="180" width="180" alt=""></a></figure>
+                    <figure>
+                        <?php if (has_post_thumbnail() ): ?>
+                        <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('thumbnail'); ?></a>
+                         <?php else: ?>
+                        <a href="<?php the_permaiink(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/common/noimage_180*180.png" height"180" width="180" alt=""></a>
+                        <?php endif; ?>
+                    </figure>
                 </article><!-- /.news -->
+                <?php 
+                          endwhile; 
+                          endif; 
+                ?>
 
             </section><!-- /.newsBlock -->
 
