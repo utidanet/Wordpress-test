@@ -7,9 +7,10 @@
 glecode.com/svn/trunk/html5.js"></script>
 <script src="https://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
 <![endif]-->
-<title><?php bloginfo('name'); ?></title>
+<title><?php if (!is_home() ){wp_title('　-　',true,'right');}bloginfo('name');  ?></title>
     <?php wp_head(); ?>
     <?php wp_enqueue_script('jquery');wp_head();  ?>
+    <?php wp_enqueue_script('jquery');wp_enqueue_script('hotel-common',get_template_directory_uri().'/js/common.js');wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
     <header class="globalHeader">
@@ -22,3 +23,15 @@ glecode.com/svn/trunk/html5.js"></script>
             </form>
         </div>
     </header><!-- /.globalHeader -->
+       
+    <?php if( is_home() ): ?>
+    <div class="homeVisual"><span>石垣島でのんびりゆったりと。</span></div>
+    <?php endif; ?>
+    <nav class="globalNavi">
+        <ul>
+            <li><a href="index.php">HOME</a></li>
+            <li><a href="../hotel/about.html">ホテル紹介</a></li>
+            <li><a href="../hotel/access.html">アクセス</a></li>
+            <li><a href="../hotel/contact.html">お問い合わせ</a></li>
+        </ul>
+    </nav><!-- /.globalNavi -->
